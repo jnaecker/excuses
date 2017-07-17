@@ -1,0 +1,100 @@
+---
+title: "Google Survey Analysis"
+author: "Jeffrey Naecker"
+date: "5/11/2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, message=FALSE, echo=FALSE, warning = FALSE}
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+library(stringr)
+library(tidyr)
+library(hrbrthemes)
+
+knitr::opts_chunk$set(message = FALSE, echo = FALSE, warning = FALSE)
+
+theme_set(theme_ipsum())
+```
+
+```{r import}
+responses <- 
+  read_excel("survey-rsa7c6dtoorshwj7dafuv3oas4.xls", sheet=3) %>%
+  mutate(State = str_sub(Geography, -2, -1)) %>%
+  mutate(`Response Time (ms)` = as.numeric(str_replace(`Response Time #1`, "ms", ""))) %>%
+  select(-`Time (UTC)`, -`Publisher Category`, -`Parental Status`, -Weight, -Geography, -`Response Time #1`) %>%
+  setNames(sub("Question #1 Answer( [0-9])*: ", "", names(.))) 
+
+responses$`User ID` <- factor(responses$`User ID`)
+responses$`Gender` <- factor(responses$`Gender`)
+responses$`Age` <- factor(responses$`Age`)
+responses$`State` <- factor(responses$`State`)
+responses$`Urban Density` <- factor(responses$`Urban Density`, levels = c("Urban", "Suburban", "Rural", "Unknown"))
+responses$Income <- factor(responses$Income, levels = c("$0-$24,999", "$25,000-$49,999", "$50,000-$74,999", "$75,000-$99,999", "$100,000-$149,999", "$150,000+", "I prefer not to say", "Unknown"))
+
+items <- responses %>%
+  melt(id.vars = c("User ID", "Gender", "Age", "State", "Urban Density", "Income", "Response Time (ms)"), variable.name = "Question", value.name = "Response") %>%
+  mutate(Response = !is.na(Response), Question = factor(Question))
+
+reasons <- items %>%
+  filter(Response) %>%
+  mutate(Reason = Question) %>%
+  select(-Question, -Response)
+```
+
+
+## Descriptive Statistics
+
+Below I plot histograms of the distribution of respondents by age, gender, income, and US state.
+
+```{r}
+ggplot(responses, aes(x = Age)) + stat_count() 
+ggplot(responses, aes(x = Gender)) + stat_count()
+ggplot(responses, aes(x = Income)) + stat_count() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(responses, aes(x = State)) + stat_count() + theme(axis.text.x = element_text(size = 6))
+```
+
+## Reasons Not to Give More
+
+This plot replicates the default view on Google's survey dashboard:
+
+```{r}
+items %>% 
+  group_by(Question) %>% 
+  summarize(Fraction = mean(Response)) %>%
+  ggplot(aes(x = Question, y = Fraction)) +
+  geom_bar(stat = "identity") + 
+  coord_flip() + 
+  scale_x_discrete(limits = rev(levels(reasons$Reason)))
+```
+
+We can break this up by gender to see that men and women's reason for not giving are actually pretty similar:
+
+```{r}
+items %>% 
+  group_by(Question, Gender) %>% 
+  summarize(Fraction = mean(Response)) %>%
+  ggplot(aes(x = Question, y = Fraction, fill = Gender)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  coord_flip() +
+  scale_x_discrete(limits = rev(levels(reasons$Reason))) +
+  scale_fill_manual(values=c("#E69F00", "#56B4E9", "#999999"))
+```
+
+Similarly, we can look at the excuse distribution by income level:
+
+```{r}
+items %>% 
+  group_by(Question, Income) %>% 
+  summarize(Fraction = mean(Response)) %>%
+  ggplot(aes(x = Question, y = Fraction)) +
+  geom_bar(stat = "identity") + 
+  facet_wrap(~Income) +
+  coord_flip() +
+  scale_x_discrete(limits = rev(levels(reasons$Reason)))
+```
+
