@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{epstopdf}
+\usepackage{fullpage}
 
 
 \title{Design Ideas}
@@ -12,6 +13,163 @@
 \begin{document}
 \maketitle
 
+The general gist is that if we have people make decisions involving risk only or social preferences only, we should be able to estimate all relevant preference parameters.  However, Christine's research suggests that these estimates will not predict decisions that involve \emph{both} risk and social preferences.  Our hope is that when subjects are offering insurance, they will ``step back in" to the standard model, and we will again be able to predict their decisions with the estimated parameters.
 
+\section{Theory}
+
+Assume that for payoff $x_s$ for the agent (``self") and $x_o$ for the ``other", utility is given by 
+
+\[
+u(x_s, x_o) = \alpha x_s^{\rho_s} + (1-\alpha) x_o^{\rho_o}.
+\]
+ 
+If there are two states of the world, occurring with probabilities $\pi$ and $1-\pi$, then the expected utility is given by
+
+\[
+\pi \left [ \alpha x_{s1}^{\rho_s} + (1-\alpha) x_{o1}^{\rho_o} \right ] +  (1-\pi) \left [ \alpha x_{s2}^{\rho_s} + (1-\alpha) x_{o2}^{\rho_o} \right ] 
+\]
+where $x_{s1}$ is the payoff for self in state 1, etc.
+
+\section{Estimation Strategy}
+
+\subsection{Self Risk Only}
+
+Consider first a simple case where $x_o = 0$ always, but risk is involved.  Then the subject solves
+
+\[
+\max_{x_{s1}, x_{s2}} \pi \alpha x_{s1}^{\rho_s} + (1-\pi) \alpha x_{s2}^{\rho_s} 
+\]
+
+s.t.
+
+\[
+p_{s1} x_{s1} + p_{s2} x_{s2}  = m,
+\]
+
+where we allow for different prices of consumption by self.  This results in a Lagrangian
+
+\[
+\mathcal L = pi \alpha x_{s1}^{\rho_s} + (1-\pi) \alpha x_{s2}^{\rho_s}  + \lambda (m - p_{s1} x_{s1} - p_{s2} x_{s2}.
+\]
+
+First order conditions are
+
+\begin{eqnarray}
+\pi \alpha \rho_s x_{s1}^{\rho_s-1} = \lambda p_{s1} \\
+(1-\pi) \alpha \rho_s x_{s2}^{\rho_s-1} = \lambda p_{s2}  \\
+m = p_{s1} x_{s1} - p_{s2} x_{s2}
+\end{eqnarray}
+
+Taking the ratio of the first two FOC gives
+
+\[
+\frac{\pi}{1-\pi} \left ( \frac{x_{s1}}{x_{s2}} \right ) ^{\rho_s-1} = \frac{p_{s1}}{p_{s2}}
+\]
+
+which we can rearrange to get
+
+\[
+ \frac{x_{s1}}{x_{s2}} = \left ( \frac{1-\pi}{\pi} \frac{p_{s1}}{p_{s2}} \right )^{\frac{1}{\rho_s-1}}.
+\]
+
+Taking the log of both sides gives
+
+\[
+\log \frac{x_{s1}}{x_{s2}} =  \frac{1}{\rho_s-1} \log \left ( \frac{1-\pi}{\pi} \frac{p_{s1}}{p_{s2}} \right ).
+\]
+
+This means that if we run the regression
+
+\[
+\log \frac{x_{s1}}{x_{s2}} = \beta_0 + \beta_1 \log \left ( \frac{1-\pi}{\pi} \frac{p_{s1}}{p_{s2}} \right ) + \epsilon
+\]
+
+Then the estimate of $\beta_1$ can give an estimate of $\rho_s$, which we can interpret as the individual's risk preferences over money for self.
+
+\subsection{Charity Risk Only}
+
+Suppose instead we have the subject make a decision where $x_s = 0$ always, eg
+
+\[
+\max_{x_{o1}, x_{o2}} \pi \alpha x_{o1}^{\rho_o} + (1-\pi) \alpha x_{o2}^{\rho_o} 
+\]
+
+s.t.
+
+\[
+p_{o1} x_{o1} + p_{o2} x_{o2}  = m.
+\]
+
+Then by analogy with the previous case, if we run the regression
+
+\[
+\log \frac{x_{o1}}{x_{o2}} = \beta_0 + \beta_1 \log \left ( \frac{1-\pi}{\pi} \frac{p_{o1}}{p_{o2}} \right ) + \epsilon
+\]
+
+Then the estimate of $\beta_1$ can give an estimate of $\rho_o$, which we can interpret as the subject's presumed risk preferences of the charity.
+
+\subsection{Self-Charity Tradeoff Under Certainty}
+
+Next, consider a decision where there is no uncertainty, but the subject now must make a tradeoff between money for self and money for the charity.  The subject solves
+
+\[
+\max_{x_s, x_o}  \alpha x_s^{\rho_s} + (1-\alpha) x_o^{\rho_o}
+\]
+
+s.t.
+
+\[
+p_s x_s + p_o x_o = m,
+\]
+
+giving a Lagrangian
+
+\[
+\mathcal L =  \alpha x_s^{\rho_s} + (1-\alpha) x_o^{\rho_o} + \lambda (m - p_s x_s - p_o x_o).
+\]
+
+The FOC are
+
+\begin{eqnarray}
+ \alpha \rho_s x_{s}^{\rho_s-1} = \lambda p_{s} \\
+(1- \alpha) \rho_o x_{o}^{\rho_o-1} = \lambda p_{o} \\
+m = p_{s} x_{s} - p_{o} x_{o}
+\end{eqnarray}
+
+Combining the first two FOC, we get
+
+\[
+\frac{\alpha}{1-\alpha} \frac{\rho_s}{\rho_o} x_{s}^{\rho_s-1} x_{0}^{1-\rho_o} = \frac{p_s}{p_o}.
+\]
+
+Rearranging a bit gives us
+
+\[
+\frac{p_s}{p_o} = \frac{\rho_s}{\rho_o} \frac{\alpha}{1-\alpha} x_{s}^{\rho_s-1} x_{0}^{1-\rho_o} 
+\]
+
+which we can take logs of to find
+
+\[
+\log \left (\frac{p_s}{p_o} \right ) = \log \left ( \frac{\rho_s}{\rho_o}  \frac{\alpha}{1-\alpha}  \right ) + (\rho_s-1) \log x_{s} + (\rho_0-1) \log x_{o}.
+\]
+
+Thus if we the regression 
+
+\[
+\log \left (\frac{p_s}{p_o} \right ) =\beta_0 + \beta_1 \log x_{s} + \beta_2 \log x_{o},
+\]
+
+we can get an estimate of $\alpha$ from the estimate\footnote{It would be nice if the estimate of $\alpha$ did not depend on the estimate of the $\rho$'s, but I can't figure out a reasonable utility function that has this feature.  I also don't know if it is kosher to do the regression in this way (with the choice variables on the right side).} of $\beta_0$. 
+
+\section{Prediction Exercise}
+
+\subsection{No Insurance}
+
+We would then do a treatment where the subject would choose amounts $x_0$ and $x_s$, but under uncertainty as to whether their budget was $m_1$ or $m_2$.  In theory we should be able to predict their choice using our estimates of $\alpha$, $\rho_s$, and $\rho_0$.  However, Christine's work suggests that subjects will use risk about their endowment as an excuse not to give.  In particular, our predicted amount given $\hat x_o$ will over-state the actual donation levels.
+
+\subsection{Insurance}
+
+Imagine the same case as above, but the subject is offered insurance in the following sense: if they end up in the ``bad" endowment state, they can take back their donation.  In theory we should be able to again make a prediction about the donation amount.  We hypothesize that in this case our prediction will be accurate, as the subjects can no longer use risk as an excuse not to donate.
 
 \end{document}  
