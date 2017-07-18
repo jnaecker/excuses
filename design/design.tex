@@ -162,6 +162,26 @@ Thus if we the regression
 
 we can get an estimate of $\alpha$ from the estimate\footnote{It would be nice if the estimate of $\alpha$ did not depend on the estimate of the $\rho$'s, but I can't figure out a reasonable utility function that has this feature.  I also don't know if it is kosher to do the regression in this way (with the choice variables on the right side).} of $\beta_0$. 
 
+\subsubsection{Simplified Approach}
+
+If we assume that $\rho_s = \rho_o$, then the Euler equation above becomes 
+\[
+\frac{p_s}{p_o} =\frac{\alpha}{1-\alpha} \left ( \frac{x_{s}}{x_{o}} \right )^{\rho-1}  ,
+\]
+which we can rearrange to get
+\[
+\frac{x_{s}}{x_{o}} = \left ( \frac{1-\alpha}{\alpha}  \frac{p_s}{p_o}\right )^{\frac{1}{\rho_s-1}}.
+\]
+Taking logs, we get
+\[
+\log \left ( \frac{x_{s}}{x_{o}} \right ) = \frac{1}{\rho_s-1} \log \left ( \frac{1-\alpha}{\alpha} \right ) + \frac{1}{\rho_s-1}  \log \left (\frac{p_s}{p_o}\right ).
+\]
+Thus if we run the regression 
+\[
+\log \left (\frac{x_s}{x_o} \right ) =\beta_0 + \beta_1  \log \left (\frac{p_s}{p_o}\right ),
+\]
+the coefficient $\beta_0$ will provide us an estimate of $\alpha$.
+
 \section{Prediction Exercise}
 
 \subsection{No Insurance}
