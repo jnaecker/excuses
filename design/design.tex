@@ -2,6 +2,7 @@
 
 \usepackage{graphicx}
 \usepackage{amssymb}
+\usepackage{amsmath}
 \usepackage{epstopdf}
 \usepackage{fullpage}
 
@@ -51,6 +52,29 @@ Note that the first two terms, $u_1(e_2 - x, x) -u_1(e_1 - x, x)$, sum to a posi
 
 Since all the Topkis conditions are satisfied, we can then claim that the optimal choice of $x^*(p)$ is non-decreasing in in $p$.    In particular suppose we let $x^*(1)$ be the optimal donation when $p=1$ (so the endowment is $e_1$ for certain), and $x^*(0)$ be the optimal donation when $p=0$ (so the endowment is $e_2$ for certain).  Then for any case where the endowment is uncertain, ie when $p \in (0,1)$, it must be that $x^*(0) < x^*(p) < x^*(1)$. That is, the optimal donation under risk is somewhere between the optimal donations under the good and bad states.
 	
+\section{What the Normalization Task Gives Us}
+
+Our normalization task gives us a sequence of numbers $X(N)$ such that the agent is indifferent between \$$N $ for charity 2 and \$$X(N)$ for themselves, ie
+\[
+(0, 0, N) \sim (X(N), 0, 0).
+\]
+In our design we currently elicit $X(N)$ for $N \in (5, 6, 7, 8, 9, 10)$.  We can then examine whether $X(N)$ is linear in $N$ or convex.  
+
+However, it is unclear how the normalization task helps us in the remaining tasks.  In rounds 1a, 1b, 2a, 2b, the agent makes maximization decisions that give us the following donation amounts:
+\begin{flalign*}
+x^*_{1a} &= \arg \max_x u(0, x, 10-x) \\
+x^*_{1b} &= \arg \max_x u(X(10) - x, x, 0) \\
+x^*_{2a}(q) &= \arg \max_x q u(0, x, 10-x)  + (1-q) u(0, x, 5-x) \\
+x^*_{2b}(q) &= \arg \max_x q u(X(10) - x, x, 0) + (1-q) u(X(5) - x, x, 0) 
+\end{flalign*}
+where the last two lines are collected for a series of $q$ we have not determined yet.  It is not clear how the normalization tasks helps us make any statements about the relationship between the various $x*$.  In fact I am not even sure what our intuitive predictions would be.
+
+
+
+
+
+
+
 
 
 
