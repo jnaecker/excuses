@@ -13,216 +13,53 @@
 \begin{document}
 \maketitle
 
-The general gist is that if we have people make decisions involving risk only or social preferences only, we should be able to estimate all relevant preference parameters.  However, Christine's research suggests that these estimates will not predict decisions that involve \emph{both} risk and social preferences.  Our hope is that when subjects are offering insurance, they will ``step back in" to the standard model, and we will again be able to predict their decisions with the estimated parameters.
+\section{Optimal Donation Under Risk is Bounded}
 
-\section{Theory}
-
-Assume that for payoff $x_s$ for the agent (``self") and $x_o$ for the ``other", utility is given by 
-
+Assume that we have an agents whose endowment may be either $e_1$ or $e_2$ with probability $p$ and $1-p$ respectively.  Let $e_1 > e_2$, so state 1 is the ``good" state and state 2 is the ``bad" state.  Then in our design the agent chooses a donation amount $x$ to satisfy
 \[
-u(x_s, x_o) = \alpha x_s^{\rho_s} + (1-\alpha) x_o^{\rho_o}.
+\max_{x \in [0, e_2]} p u(e_1 - x, x) + (1-p) u(e_2 - x, x)
 \]
- 
-If there are two states of the world, occurring with probabilities $\pi$ and $1-\pi$, then the expected utility is given by
+where the utility function $u$ satisfies $u_1>0, u_2>0$ and $u_{11}>0, u_{22}>0$.  That is, more money for either the agent or the other party is better (holding the other amount fixed), but there are decreasing returns.  Additionally, for what follows we will need to assume that $u_{12} < 0$, meaning that as the agent's own income increases, the marginal returns to increasing the other party's income are decreasing.
 
+Note that if we write $D =  [0, e_2]$ and $f(x, p) = p u(e_1 - x, x) + (1-p) u(e_2 - x, x)$ this problem can be rewritten as
 \[
-\pi \left [ \alpha x_{s1}^{\rho_s} + (1-\alpha) x_{o1}^{\rho_o} \right ] +  (1-\pi) \left [ \alpha x_{s2}^{\rho_s} + (1-\alpha) x_{o2}^{\rho_o} \right ] 
+\max_{x \in [0, e_2]} f(x, p),
 \]
-where $x_{s1}$ is the payoff for self in state 1, etc.
+which allows us to apply the Topkis theorem.  The condition for the theorem to be met are as follows.
 
-\section{Estimation Strategy}
+\begin{enumerate}
 
-\subsection{Self Risk Only}
+\item $D$ is a lattice.  This is trivially true for a line segment.
 
-Consider first a simple case where $x_o = 0$ always, but risk is involved.  Then the subject solves
+\item $f$ is supermodular in $x$.  This is trivially true since there is a single choice variable.
 
+\item $f$ has increasing differences in $(x, p)$.  This is satisfied if $\frac{\partial^2 f}{\partial p \partial x} \geq 0$.  Note that 
 \[
-\max_{x_{s1}, x_{s2}} \pi \alpha x_{s1}^{\rho_s} + (1-\pi) \alpha x_{s2}^{\rho_s} 
+\frac{\partial f}{\partial p} = u(e_1 - x, x) - u(e_2 - x, x) 
 \]
-
-s.t.
-
+so 
 \[
-p_{s1} x_{s1} + p_{s2} x_{s2}  = m,
-\]
-
-where we allow for different prices of consumption by self.  This results in a Lagrangian
-
-\[
-\mathcal L = pi \alpha x_{s1}^{\rho_s} + (1-\pi) \alpha x_{s2}^{\rho_s}  + \lambda (m - p_{s1} x_{s1} - p_{s2} x_{s2}.
-\]
-
-First order conditions are
-
-\begin{eqnarray}
-\pi \alpha \rho_s x_{s1}^{\rho_s-1} = \lambda p_{s1} \\
-(1-\pi) \alpha \rho_s x_{s2}^{\rho_s-1} = \lambda p_{s2}  \\
-m = p_{s1} x_{s1} - p_{s2} x_{s2}
-\end{eqnarray}
-
-Taking the ratio of the first two FOC gives
-
-\[
-\frac{\pi}{1-\pi} \left ( \frac{x_{s1}}{x_{s2}} \right ) ^{\rho_s-1} = \frac{p_{s1}}{p_{s2}}
-\]
-
-which we can rearrange to get
-
-\[
- \frac{x_{s1}}{x_{s2}} = \left ( \frac{1-\pi}{\pi} \frac{p_{s1}}{p_{s2}} \right )^{\frac{1}{\rho_s-1}}.
-\]
-
-Taking the log of both sides gives
-
-\[
-\log \frac{x_{s1}}{x_{s2}} =  \frac{1}{\rho_s-1} \log \left ( \frac{1-\pi}{\pi} \frac{p_{s1}}{p_{s2}} \right ).
-\]
-
-This means that if we run the regression
-
-\[
-\log \frac{x_{s1}}{x_{s2}} = \beta_0 + \beta_1 \log \left ( \frac{1-\pi}{\pi} \frac{p_{s1}}{p_{s2}} \right ) + \epsilon
-\]
-
-Then the estimate of $\beta_1$ can give an estimate of $\rho_s$, which we can interpret as the individual's risk preferences over money for self.
-
-\subsection{Charity Risk Only}
-
-Suppose instead we have the subject make a decision where $x_s = 0$ always, eg
-
-\[
-\max_{x_{o1}, x_{o2}} \pi \alpha x_{o1}^{\rho_o} + (1-\pi) \alpha x_{o2}^{\rho_o} 
-\]
-
-s.t.
-
-\[
-p_{o1} x_{o1} + p_{o2} x_{o2}  = m.
-\]
-
-Then by analogy with the previous case, if we run the regression
-
-\[
-\log \frac{x_{o1}}{x_{o2}} = \beta_0 + \beta_1 \log \left ( \frac{1-\pi}{\pi} \frac{p_{o1}}{p_{o2}} \right ) + \epsilon
-\]
-
-Then the estimate of $\beta_1$ can give an estimate of $\rho_o$, which we can interpret as the subject's presumed risk preferences of the charity.
-
-\subsection{Self-Charity Tradeoff Under Certainty}
-
-Next, consider a decision where there is no uncertainty, but the subject now must make a tradeoff between money for self and money for the charity.  The subject solves
-
-\[
-\max_{x_s, x_o}  \alpha x_s^{\rho_s} + (1-\alpha) x_o^{\rho_o}
-\]
-
-s.t.
-
-\[
-p_s x_s + p_o x_o = m,
-\]
-
-giving a Lagrangian
-
-\[
-\mathcal L =  \alpha x_s^{\rho_s} + (1-\alpha) x_o^{\rho_o} + \lambda (m - p_s x_s - p_o x_o).
-\]
-
-The FOC are
-
-\begin{eqnarray}
- \alpha \rho_s x_{s}^{\rho_s-1} = \lambda p_{s} \\
-(1- \alpha) \rho_o x_{o}^{\rho_o-1} = \lambda p_{o} \\
-m = p_{s} x_{s} - p_{o} x_{o}
-\end{eqnarray}
-
-Combining the first two FOC, we get
-
-\[
-\frac{\alpha}{1-\alpha} \frac{\rho_s}{\rho_o} x_{s}^{\rho_s-1} x_{0}^{1-\rho_o} = \frac{p_s}{p_o}.
-\]
-
-Rearranging a bit gives us
-
-\[
-\frac{p_s}{p_o} = \frac{\rho_s}{\rho_o} \frac{\alpha}{1-\alpha} x_{s}^{\rho_s-1} x_{0}^{1-\rho_o} 
-\]
-
-which we can take logs of to find
-
-\[
-\log \left (\frac{p_s}{p_o} \right ) = \log \left ( \frac{\rho_s}{\rho_o}  \frac{\alpha}{1-\alpha}  \right ) + (\rho_s-1) \log x_{s} + (\rho_0-1) \log x_{o}.
-\]
-
-Thus if we the regression 
-
-\[
-\log \left (\frac{p_s}{p_o} \right ) =\beta_0 + \beta_1 \log x_{s} + \beta_2 \log x_{o},
-\]
-
-we can get an estimate of $\alpha$ from the estimate\footnote{It would be nice if the estimate of $\alpha$ did not depend on the estimate of the $\rho$'s, but I can't figure out a reasonable utility function that has this feature.  I also don't know if it is kosher to do the regression in this way (with the choice variables on the right side).} of $\beta_0$. 
-
-\subsubsection{Simplified Approach}
-
-If we assume that $\rho_s = \rho_o$, then the Euler equation above becomes 
-\[
-\frac{p_s}{p_o} =\frac{\alpha}{1-\alpha} \left ( \frac{x_{s}}{x_{o}} \right )^{\rho-1}  ,
+\frac{\partial^2 f}{\partial p \partial x} = -u_1(e_1 - x, x) + u_2(e_1 - x, x) + u_1(e_2 - x, x) - u_2(e_2 - x, x) 
 \]
 which we can rearrange to get
 \[
-\frac{x_{s}}{x_{o}} = \left ( \frac{1-\alpha}{\alpha}  \frac{p_s}{p_o}\right )^{\frac{1}{\rho_s-1}}.
+\frac{\partial^2 f}{\partial p \partial x}   u_1(e_2 - x, x) -u_1(e_1 - x, x) + u_2(e_1 - x, x) - u_2(e_2 - x, x)  .
 \]
-Taking logs, we get
-\[
-\log \left ( \frac{x_{s}}{x_{o}} \right ) = \frac{1}{\rho_s-1} \log \left ( \frac{1-\alpha}{\alpha} \right ) + \frac{1}{\rho_s-1}  \log \left (\frac{p_s}{p_o}\right ).
-\]
-Thus if we run the regression 
-\[
-\log \left (\frac{x_s}{x_o} \right ) =\beta_0 + \beta_1  \log \left (\frac{p_s}{p_o}\right ),
-\]
-the coefficient $\beta_0$ will provide us an estimate of $\alpha$.
+Note that the first two terms, $u_1(e_2 - x, x) -u_1(e_1 - x, x)$, sum to a positive number by our assumption that $u_{11} > 0$.  The second two terms, $u_2(e_1 - x, x) - u_2(e_2 - x, x)$, will also sum to a positive number by our assumption that $u_{12} < 0$.  Thus $\frac{\partial^2 f}{\partial p \partial x} > 0$ as desired.
+\end{enumerate}
 
-\section{Prediction Exercise}
 
-\subsection{No Insurance}
+Since all the Topkis conditions are satisfied, we can then claim that the optimal choice of $x^*(p)$ is non-decreasing in in $p$.    In particular suppose we let $x^*(1)$ be the optimal donation when $p=1$ (so the endowment is $e_1$ for certain), and $x^*(0)$ be the optimal donation when $p=0$ (so the endowment is $e_2$ for certain).  Then for any case where the endowment is uncertain, ie when $p \in (0,1)$, it must be that $x^*(0) < x^*(p) < x^*(1)$. That is, the optimal donation under risk is somewhere between the optimal donations under the good and bad states.
+	
 
-We would then do a treatment where the subject would choose amounts $x_0$ and $x_s$, but under uncertainty as to whether their budget was $m_1$ or $m_2$.  In theory we should be able to predict their choice using our estimates of $\alpha$, $\rho_s$, and $\rho_0$.  However, Christine's work suggests that subjects will use risk about their endowment as an excuse not to give.  In particular, our predicted amount given $\hat x_o$ will over-state the actual donation levels.
 
-\subsection{Insurance}
 
-Imagine the same case as above, but the subject is offered insurance in the following sense: if they end up in the ``bad" endowment state, they can take back their donation.  In theory we should be able to again make a prediction about the donation amount.  We hypothesize that in this case our prediction will be accurate, as the subjects can no longer use risk as an excuse not to donate.
 
-\section{Christine's Ideas}
 
-\subsection{Normalization Tasks}
 
-Suppose the choice objects are vectors indicating money for self, money for charity, and money for some third party (eg another lab participant).  Then we can use a price list to figure out an amount $X$ such that the subject is indifferent between $E$ for themselves and $X$ for the charity:
-\[
-(E, 0, 0) \sim (0,X,0)
-\]
-Similarly, we can find an amount $Y$ such that
-\[
-(E, 0, 0) \sim (0, 0, Y),
-\]
-where the third entry in the vector is the amount for the third party.\footnote{We may want to repeat this normalization task for a range of endowments for the participant, $E_1, \ldots E_n$.}
 
-\subsection{Donation Decision}
 
-Subjects make a decision of how much to donate out of their endowment to the charity, and how much to donate out of the third party's endowment.  This would be done by direct choice, not price list.
 
-Example: You have a budget of \$10.  How much would you like to give to charity?  
-
-\subsection{Donation Under Uncertainty}
-
-Same as above, but must decide how much to donate out of an uncertain endowment for self.
-
-Example: Your budget may be \$5 or \$10 with equal probability.  How much would you like to give to charity?
-
-\subsection{Donation Under Uncertainty with Insurance}
-
-Same as above, but have option to take back donation if get "bad" state (ie smaller endowment).
-
-Example: Your budget may be \$5 or \$10 with equal probability.  How much would you like to give to charity?  In the event that your endowment is \$5, you will have the option to take back this donation.
 
 
 \end{document}  
