@@ -20,7 +20,7 @@ Assume that we have an agents whose endowment may be either $e_1$ or $e_2$ with 
 \[
 \max_{x \in [0, e_2]} p u(e_1 - x, x) + (1-p) u(e_2 - x, x)
 \]
-where the utility function $u$ satisfies $u_1>0, u_2>0$ and $u_{11}>0, u_{22}>0$.  That is, more money for either the agent or the other party is better (holding the other amount fixed), but there are decreasing returns.  Additionally, for what follows we will need to assume that $u_{12} < 0$, meaning that as the agent's own income increases, the marginal returns to increasing the other party's income are decreasing.
+where the utility function $u$ satisfies $u_1>0, u_2>0$ and $u_{11}<0, u_{22}<0$.  That is, more money for either the agent or the other party is better (holding the other amount fixed), but there are decreasing returns.  Additionally, for what follows we will need to assume that $u_{12} < 0$, meaning that as the agent's own income increases, the marginal returns to increasing the other party's income are decreasing.
 
 Note that if we write $D =  [0, e_2]$ and $f(x, p) = p u(e_1 - x, x) + (1-p) u(e_2 - x, x)$ this problem can be rewritten as
 \[
@@ -46,7 +46,7 @@ which we can rearrange to get
 \[
 \frac{\partial^2 f}{\partial p \partial x}   u_1(e_2 - x, x) -u_1(e_1 - x, x) + u_2(e_1 - x, x) - u_2(e_2 - x, x)  .
 \]
-Note that the first two terms, $u_1(e_2 - x, x) -u_1(e_1 - x, x)$, sum to a positive number by our assumption that $u_{11} > 0$.  The second two terms, $u_2(e_1 - x, x) - u_2(e_2 - x, x)$, will also sum to a positive number by our assumption that $u_{12} < 0$.  Thus $\frac{\partial^2 f}{\partial p \partial x} > 0$ as desired.
+Note that the first two terms, $u_1(e_2 - x, x) -u_1(e_1 - x, x)$, sum to a positive number by our assumption that $u_{11} < 0$.  The second two terms, $u_2(e_1 - x, x) - u_2(e_2 - x, x)$, will also sum to a positive number by our assumption that $u_{12} < 0$.  Thus $\frac{\partial^2 f}{\partial p \partial x} > 0$ as desired.
 \end{enumerate}
 
 
