@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Select option A or option B for each row.
+{% endblock %}
+
+{% block content %}
+
+	<table class="table">
+    <tr>
+        <th>Choice Number</th><th>Option A</th><th>Option B</th>
+    </tr>
+    {% for number in norm_numbers %}
+    <tr>
+        <td>{{ number }}</td>
+        <td><input type="radio" name="norm_{{ number }}" value="True" required></td>
+        <td><input type="radio" name="norm_{{ number }}" value="False" required></td>
+    </tr>
+    {% endfor %}
+</table>
+
+    {% next_button %}
+
+{% endblock %}
