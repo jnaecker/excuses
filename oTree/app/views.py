@@ -6,10 +6,10 @@ from .models import Constants
 
 class Normalization(Page):
     form_model = models.Player
-    form_fields = ['norm_{}'.format(i) for i in range(1, 6)]
+    form_fields = ['norm_{}'.format(i) for i in range(1, 10)]
 
     def vars_for_template(self):
-        return {'norm_numbers': range(1, 6)}
+        return {'norm_numbers': range(1, 10)}
 
 
 class ResultsWaitPage(WaitPage):
@@ -23,5 +23,5 @@ class Results(Page):
 
 
 page_sequence = [
-    Normalization
+    Normalization, Results
 ]

@@ -31,3 +31,8 @@ class Player(BasePlayer):
     norm_3 = models.BooleanField()
     norm_4 = models.BooleanField()
     norm_5 = models.BooleanField()
+    norm_6 = models.BooleanField()
+    norm_7 = models.BooleanField()
+    norm_8 = models.BooleanField()
+    norm_9 = models.BooleanField()
+    norm_10 = models.BooleanField()
