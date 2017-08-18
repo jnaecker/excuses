@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Normalization Task
+{% endblock %}
+
+{% block content %}
+
+	{{ form.normalization_1.errors }}
+	{{ form.normalization_2.errors }}
+
+	<table class="table">
+		<tr>
+			<th>Choice Number</th><th>Option A</th><th>Option B</th>
+		</tr>
+		{% for choice_number in choice_numbers %}
+		<tr>
+			<td>{{ choice_number }}</td>
+			<td><input type="radio" name="normalization_{{ choice_number }}" value="True"> {{ subsession.round_number|c }} for the charity </td>
+			<td><input type="radio" name="normalization_{{ choice_number }}" value="False"> {{ choice_number|c }} for yourself </td>
+		</tr>
+		{% endfor %}
+
+		
+	</table>
+
+    {% next_button %}
+
+{% endblock %}
