@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     name_in_url = 'normalization'
     players_per_group = None
     num_rounds = 3
-    num_rows = 11
+    num_rows = 5
 
 class Subsession(BaseSubsession):
     
@@ -38,18 +38,10 @@ class Player(BasePlayer):
     normalization_2 = models.BooleanField()
     normalization_3 = models.BooleanField()
     normalization_4 = models.BooleanField()
-    normalization_5 = models.BooleanField()
-    normalization_6 = models.BooleanField()
-    normalization_7 = models.BooleanField()
-    normalization_8 = models.BooleanField()
-    normalization_9 = models.BooleanField()
-    normalization_10 = models.BooleanField()
 
     normalization_amount = models.IntegerField()
 
     def set_payoffs(self):
-
-        # find normalized payoff
 
         # set payoffs
         if (self.round_number == self.session.vars['paying_round'] and not normalization[self.session.vars['paying_choice']]):
