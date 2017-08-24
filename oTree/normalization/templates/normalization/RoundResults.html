@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+	<p>Normalization choices:</p>
+	<p>{{ player.normalization_0 }}</p>
+	<p>{{ player.normalization_1 }}</p>
+	<p>{{ player.normalization_2 }}</p>
+	<p>{{ player.normalization_3 }}</p>
+	<p>{{ player.normalization_4 }}</p>
+	<p>{{ player.normalization_5 }}</p>
+	<p>{{ player.normalization_6 }}</p>
+	<p>{{ player.normalization_7 }}</p>
+	<p>{{ player.normalization_9 }}</p>
+	<p>{{ player.normalization_10 }}</p>
+
+	<p>Normalization amount: TBD </p>
+
+	{% next_button %}
+
+	{{ form.errors }}
+
+{% endblock %}
+
+

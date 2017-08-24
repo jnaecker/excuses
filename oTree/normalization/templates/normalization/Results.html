@@ -9,17 +9,23 @@
 
 	<table class="table">
 		<tr>
-			<th>Choice Number</th><th>Choice</th>
+			<th>Round</th><th>Normalization amount</th>
 		</tr>
 
-		{% for choice_number in choice_numbers %}
+		{% for p in player_in_all_rounds %}
 		<tr>
-			<td>{{ choice_number }}</td><td>Option A or Option B</td>
+			<td>{{ p.round_number }}</td>
+			<td><{{ p.normalization_amount }}/td>
 		</tr>
 		{% endfor %}
 		
 	</table>
 
+	<p>
+		The paying round was {{ paying_round }}. 
+		The paying choice was {{ paying_choice }}.
+		Your payoff is therefore {{ player.payoff }}.
+	</p>
 
 {% endblock %}
 
