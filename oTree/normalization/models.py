@@ -51,12 +51,13 @@ class Player(BasePlayer):
 
 
     #Need to make this a session vars 
-    
+    #Do these need to be a models field????
+    #Maybe move to another function?
     round_norms_0 = models.IntegerField()
     round_norms_1 = models.IntegerField()
     round_norms_2 = models.IntegerField()
-    round_norms_3 = models.IntegerField()
-    round_norms_4 = models.IntegerField()
+    #round_norms_3 = models.IntegerField()
+    #round_norms_4 = models.IntegerField()
     #for i in range(0,Constants.num_rounds-1):
     #	round_norms.append(models.IntegerField())
 
