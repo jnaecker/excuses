@@ -32,14 +32,32 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
+    
     # this is crappy, needs to be replaced with loop or list or dict
-    normalization_0 = models.BooleanField()    
-    normalization_1 = models.BooleanField()
-    normalization_2 = models.BooleanField()
-    normalization_3 = models.BooleanField()
-    normalization_4 = models.BooleanField()
+
+    normalization = []
+    for i in range(0:Constants.num_rows):
+    	normalization.append(models.BooleanField())
+
+
+    #normalization_0 = models.BooleanField()    
+    #normalization_1 = models.BooleanField()
+    #normalization_2 = models.BooleanField()
+    #normalization_3 = models.BooleanField()
+    #normalization_4 = models.BooleanField()
+
 
     normalization_amount = models.IntegerField()
+
+
+    #Need to make this a session vars 
+    self.session.vars['round_norms2']=[]
+
+
+    round_norms = []
+    #for i in range(0,Constants.num_rounds-1):
+    #	round_norms.append(models.IntegerField())
+
 
     def set_payoffs(self):
 

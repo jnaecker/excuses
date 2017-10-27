@@ -11,11 +11,8 @@ class Normalization(Page):
     
     def before_next_page(self):
     	# find normalized payoff
-        self.session.vars['normalization_amount'] = [self.player.normalization_0,
-        											 self.player.normalization_1,
-        											 self.player.normalization_2,
-        											 self.player.normalization_3,
-        											 self.player.normalization_4].index(False)
+        self.session.vars['normalization_amount'] = [self.player.normalization.index(False)]
+        self.session.vars['round_norms'].append(self.session.vars['normalization_amount'])
 
     def vars_for_template(self):
     	return {
