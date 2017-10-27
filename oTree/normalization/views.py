@@ -20,15 +20,15 @@ class Normalization(Page):
 
         #This is v hacky
         if(self.subsession.round_number==1):
-            self.session.vars['round_norms_0'] = self.session.vars['normalization_amount']
+            self.session.vars['round_norms_0'] = self.player.normalization_amount
         elif(self.subsession.round_number==2):
-            self.session.vars['round_norms_1'] = self.session.vars['normalization_amount']
+            self.session.vars['round_norms_1'] = self.player.normalization_amount
         elif(self.subsession.round_number==3):
-            self.session.vars['round_norms_2'] = self.session.vars['normalization_amount']
+            self.session.vars['round_norms_2'] = self.player.normalization_amount
         elif(self.subsession.round_number==4):
-            self.session.vars['round_norms_3'] = self.session.vars['normalization_amount']
+            self.session.vars['round_norms_3'] = self.player.normalization_amount
         else:
-            self.session.vars['round_norms_4'] = self.session.vars['normalization_amount']
+            self.session.vars['round_norms_4'] = self.player.normalization_amount
 
     def vars_for_template(self):
     	return {
@@ -41,11 +41,11 @@ class Results(Page):
 	    return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        round_norms = [self.session.vars['round_norms_0'],
-                       self.session.vars['round_norms_1'],
-                       self.session.vars['round_norms_2'],
-                       self.session.vars['round_norms_3'],
-                       self.session.vars['round_norms_4']]
+        round_norms = [self.player.round_norms_0,
+                       self.player.round_norms_1,
+                       self.player.round_norms_2,
+                       self.player.round_norms_3,
+                       self.player.round_norms_4]
 
         return {
             'paying_round': self.session.vars['paying_round'],
