@@ -7,8 +7,8 @@
 
 {% block content %}
 
-	{{ form.normalization[0].errors }}
-	{{ form.normalization[1].errors }}
+	{{ form.normalization_1.errors }}
+	{{ form.normalization_2.errors }}
 
 	<table class="table">
 		<tr>
@@ -17,8 +17,8 @@
 		{% for choice_number in choice_numbers %}
 		<tr>
 			<td>{{ choice_number }}</td>
-			<td><input type="radio" name="normalization[{{ choice_number }}]" value="True"> {{ subsession.round_number|c }} for the charity </td>
-			<td><input type="radio" name="normalization[{{ choice_number }}]" value="False"> {{ choice_number|c }} for yourself </td>
+			<td><input type="radio" name="normalization_{{ choice_number }}" value="True"> {{ subsession.round_number|c }} for the charity </td>
+			<td><input type="radio" name="normalization_{{ choice_number }}" value="False"> {{ choice_number|c }} for yourself </td>
 		</tr>
 		{% endfor %}
 

@@ -7,12 +7,28 @@ from .models import Constants
 class Normalization(Page):
 
     form_model = models.Player
-    form_fields = ['normalization[i]'.format(i) for i in range(0, Constants.num_rows)]
+    form_fields = ['normalization_{}'.format(i) for i in range(0, Constants.num_rows)]
     
     def before_next_page(self):
     	# find normalized payoff
-        self.session.vars['normalization_amount'] = [self.player.normalization.index(False)]
-        self.session.vars['round_norms'].append(self.session.vars['normalization_amount'])
+        self.session.vars['normalization_amount'] = [self.player.normalization_0,
+                                                     self.player.normalization_1,
+                                                     self.player.normalization_2,
+                                                     self.player.normalization_3,
+                                                     self.player.normalization_4].index(False)
+        #self.session.vars['normalization_amount'] = [self.player.normalization.index(False)]
+
+        #This is v hacky
+        if(self.subsession.round_number==1):
+            self.session.vars['round_norms_0'] = self.session.vars['normalization_amount']
+        elif(self.subsession.round_number==2):
+            self.session.vars['round_norms_1'] = self.session.vars['normalization_amount']
+        elif(self.subsession.round_number==3):
+            self.session.vars['round_norms_2'] = self.session.vars['normalization_amount']
+        elif(self.subsession.round_number==4):
+            self.session.vars['round_norms_3'] = self.session.vars['normalization_amount']
+        else:
+            self.session.vars['round_norms_4'] = self.session.vars['normalization_amount']
 
     def vars_for_template(self):
     	return {
@@ -25,10 +41,17 @@ class Results(Page):
 	    return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
+        round_norms = [self.session.vars['round_norms_0'],
+                       self.session.vars['round_norms_1'],
+                       self.session.vars['round_norms_2'],
+                       self.session.vars['round_norms_3'],
+                       self.session.vars['round_norms_4']]
+
         return {
             'paying_round': self.session.vars['paying_round'],
             'paying_choice': self.session.vars['paying_choice'],
-            'player_in_all_rounds': self.player.in_all_rounds()
+            'player_in_all_rounds': self.player.in_all_rounds(),
+            'ro_norms' : round_norms 
         }      
 
 class RoundResults(Page):
@@ -36,6 +59,7 @@ class RoundResults(Page):
     def vars_for_template(self):
         return {
             'normalization_amount': self.session.vars['normalization_amount']
+
         }     
 
 
