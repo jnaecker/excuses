@@ -7,7 +7,7 @@ from .models import Constants
 class Normalization(Page):
 
     form_model = models.Player
-    form_fields = ['normalization_{}'.format(i) for i in range(0, Constants.num_rows)]
+    form_fields = ['normalization[i]'.format(i) for i in range(0, Constants.num_rows)]
     
     def before_next_page(self):
     	# find normalized payoff

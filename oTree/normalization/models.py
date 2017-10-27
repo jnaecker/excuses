@@ -36,7 +36,7 @@ class Player(BasePlayer):
     # this is crappy, needs to be replaced with loop or list or dict
 
     normalization = []
-    for i in range(0:Constants.num_rows):
+    for i in range(0,Constants.num_rows):
     	normalization.append(models.BooleanField())
 
 
@@ -51,9 +51,7 @@ class Player(BasePlayer):
 
 
     #Need to make this a session vars 
-    self.session.vars['round_norms2']=[]
-
-
+    
     round_norms = []
     #for i in range(0,Constants.num_rounds-1):
     #	round_norms.append(models.IntegerField())
