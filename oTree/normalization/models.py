@@ -53,19 +53,18 @@ class Player(BasePlayer):
     #Need to make this a session vars 
     #Do these need to be a models field????
     #Maybe move to another function?
-    round_norms_0 = models.IntegerField()
-    round_norms_1 = models.IntegerField()
-    round_norms_2 = models.IntegerField()
-    #round_norms_3 = models.IntegerField()
-    #round_norms_4 = models.IntegerField()
-    #for i in range(0,Constants.num_rounds-1):
-    #	round_norms.append(models.IntegerField())
+    round_norms_0 = 0
+    round_norms_1 = 0
+    round_norms_2 = 0
+
+
+    payoff = 0
 
 
     def set_payoffs(self):
-
+        
         # set payoffs
-        if (self.round_number == self.session.vars['paying_round'] and not normalization[self.session.vars['paying_choice']]):
+        if (self.round_number == self.session.vars['paying_round']):
             self.payoff = self.session.vars['paying_choice']
 
 

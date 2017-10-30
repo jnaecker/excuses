@@ -30,6 +30,21 @@ class Normalization(Page):
         # else:
         #     self.session.vars['round_norms_4'] = self.player.normalization_amount
 
+
+
+        #Setting payoff
+        if(self.session.vars['paying_round']==self.subsession.round_number):
+            if(self.session.vars['paying_choice']==1) and self.player.normalization_0 == False:
+                self.session.vars['payoff']=1
+            elif(self.session.vars['paying_choice']==2) and self.player.normalization_0 == False:
+                self.session.vars['payoff']=2
+            elif(self.session.vars['paying_choice']==3) and self.player.normalization_0 == False:
+                self.session.vars['payoff']=3
+            elif(self.session.vars['paying_choice']==4) and self.player.normalization_0 == False:
+                self.session.vars['payoff']=4
+
+
+
     def vars_for_template(self):
     	return {
     		'choice_numbers': range(0, Constants.num_rows)
@@ -49,7 +64,8 @@ class Results(Page):
             'paying_round': self.session.vars['paying_round'],
             'paying_choice': self.session.vars['paying_choice'],
             'player_in_all_rounds': self.player.in_all_rounds(),
-            'ro_norms' : round_norms 
+            'payoff' : self.session.vars['payoff'],
+            'ro_norms' : round_norms
         }      
 
 class RoundResults(Page):
