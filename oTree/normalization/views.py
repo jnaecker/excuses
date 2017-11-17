@@ -16,32 +16,15 @@ class Normalization(Page):
                                                      self.player.normalization_2,
                                                      self.player.normalization_3,
                                                      self.player.normalization_4].index(False)
-        #self.session.vars['normalization_amount'] = [self.player.normalization.index(False)]
-
-        #This is v hacky
+        
         if(self.subsession.round_number==1):
             self.session.vars['round_norms_0'] = self.session.vars['normalization_amount']
         elif(self.subsession.round_number==2):
             self.session.vars['round_norms_1'] = self.session.vars['normalization_amount']
         else:
             self.session.vars['round_norms_2'] = self.session.vars['normalization_amount']
-        # elif(self.subsession.round_number==4):
-        #     self.session.vars['round_norms_3'] = self.player.normalization_amount
-        # else:
-        #     self.session.vars['round_norms_4'] = self.player.normalization_amount
 
-
-
-        #Setting payoff
-        if(self.session.vars['paying_round']==self.subsession.round_number):
-            if(self.session.vars['paying_choice']==1) and self.player.normalization_0 == False:
-                self.session.vars['payoff']=1
-            elif(self.session.vars['paying_choice']==2) and self.player.normalization_0 == False:
-                self.session.vars['payoff']=2
-            elif(self.session.vars['paying_choice']==3) and self.player.normalization_0 == False:
-                self.session.vars['payoff']=3
-            elif(self.session.vars['paying_choice']==4) and self.player.normalization_0 == False:
-                self.session.vars['payoff']=4
+        self.player.set_payoffs()
 
 
 
@@ -64,7 +47,7 @@ class Results(Page):
             'paying_round': self.session.vars['paying_round'],
             'paying_choice': self.session.vars['paying_choice'],
             'player_in_all_rounds': self.player.in_all_rounds(),
-            'payoff' : self.session.vars['payoff'],
+            'payoff' : self.participant.payoff,
             'ro_norms' : round_norms
         }      
 

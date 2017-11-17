@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+	<table class="table">
+		<tr>
+			<th>Round</th><th>Normalization amount</th>
+		</tr>
+
+		{% for p in player_in_all_rounds %}
+		<tr>
+			<td>{{ p.round_number }}</td>
+			<td>{{ ro_norms }}</td>
+		</tr>
+		{% endfor %}
+		
+	</table>
+
+	<p>
+		The paying round was {{ paying_round }}. 
+		The paying choice was {{ paying_choice }}.
+		Your payoff is therefore {{ payoff }}.
+	</p>
+
+{% endblock %}
+
+

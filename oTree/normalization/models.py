@@ -33,13 +33,6 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     
-    # this is crappy, needs to be replaced with loop or list or dict
-
-    # normalization = []
-    # for i in range(0,Constants.num_rows):
-    # 	normalization.append(models.BooleanField())
-
-
     normalization_0 = models.BooleanField()    
     normalization_1 = models.BooleanField()
     normalization_2 = models.BooleanField()
@@ -47,25 +40,25 @@ class Player(BasePlayer):
     normalization_4 = models.BooleanField()
 
 
-    normalization_amount = models.IntegerField()
-
-
-    #Need to make this a session vars 
-    #Do these need to be a models field????
-    #Maybe move to another function?
-    round_norms_0 = 0
-    round_norms_1 = 0
-    round_norms_2 = 0
-
-
-    payoff = 0
+    round_norms_0 = models.IntegerField()
+    round_norms_1 = models.IntegerField()
+    round_norms_2 = models.IntegerField()
 
 
     def set_payoffs(self):
-        
-        # set payoffs
-        if (self.round_number == self.session.vars['paying_round']):
-            self.payoff = self.session.vars['paying_choice']
+        if(self.session.vars['paying_round']==self.subsession.round_number):
+            if(self.session.vars['paying_choice']==1):
+                if self.normalization_1 == False:
+                    self.payoff=1
+            elif(self.session.vars['paying_choice']==2):
+                if self.normalization_2 == False:
+                    self.payoff=2
+            elif(self.session.vars['paying_choice']==3):
+                if self.normalization_3 == False:
+                    self.payoff=3
+            elif(self.session.vars['paying_choice']==4):
+                if self.normalization_4 == False:
+                    self.payoff=4
 
 
 
