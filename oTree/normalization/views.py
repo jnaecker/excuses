@@ -10,12 +10,14 @@ class Normalization(Page):
     form_fields = ['normalization_{}'.format(i) for i in range(0, Constants.num_rows)]
     
     def before_next_page(self):
-    	# find normalized payoff
-        self.session.vars['normalization_amount'] = [self.player.normalization_0,
+        try:
+            self.session.vars['normalization_amount'] = [self.player.normalization_0,
                                                      self.player.normalization_1,
                                                      self.player.normalization_2,
                                                      self.player.normalization_3,
                                                      self.player.normalization_4].index(False)
+        except ValueError:
+            self.session.vars['normalization_amount'] = 0
         
         if(self.subsession.round_number==1):
             self.session.vars['round_norms_0'] = self.session.vars['normalization_amount']

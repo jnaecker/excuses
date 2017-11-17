@@ -116,7 +116,7 @@ SESSION_CONFIGS = [
         'name': 'excuses',
         'display_name': 'Excuses Experiment',
         'num_demo_participants': 1,
-        'app_sequence': ['normalization','donation'],
+        'app_sequence': ['normalization'],
     }
 ]
 

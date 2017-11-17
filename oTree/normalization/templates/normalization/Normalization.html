@@ -17,8 +17,8 @@
 		{% for choice_number in choice_numbers %}
 		<tr>
 			<td>{{ choice_number }}</td>
-			<td><input type="radio" name="normalization_{{ choice_number }}" value="True"> {{ subsession.round_number|c }} for the charity </td>
-			<td><input type="radio" name="normalization_{{ choice_number }}" value="False"> {{ choice_number|c }} for yourself </td>
+			<td><input type="radio" name="normalization_{{ choice_number }}" value="True"> {{ subsession.round_number|c }} for the yourself </td>
+			<td><input type="radio" name="normalization_{{ choice_number }}" value="False"> {{ choice_number|c }} for charity </td>
 		</tr>
 		{% endfor %}
 
