@@ -40,6 +40,9 @@ class Player(BasePlayer):
     normalization_4 = models.BooleanField()
 
 
+    normalization_amount = models.IntegerField()
+
+
     round_norms_0 = models.IntegerField()
     round_norms_1 = models.IntegerField()
     round_norms_2 = models.IntegerField()

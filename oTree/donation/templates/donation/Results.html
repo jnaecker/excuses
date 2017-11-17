@@ -9,13 +9,13 @@
 
 	<table class="table">
 		<tr>
-			<th>Round</th><th>Normalization amount</th>
+			<th>Round</th><th>Donation amount</th>
 		</tr>
 
 		{% for p in player_in_all_rounds %}
 		<tr>
 			<td>{{ p.round_number }}</td>
-			<td>{{ ro_norms }}</td>
+			<td>{{ ro_don }}</td>
 		</tr>
 		{% endfor %}
 		
