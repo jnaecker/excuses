@@ -16,7 +16,7 @@ This app tests things about donations to charity under uncertainty.
 class Constants(BaseConstants):
     name_in_url = 'donation'
     players_per_group = None
-    num_rounds = 3
+    num_rounds = 11
     num_rows = 5
 
 class Subsession(BaseSubsession):

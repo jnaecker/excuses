@@ -12,13 +12,13 @@
 
 	<table class="table">
 		<tr>
-			<th>Choice Number</th><th>Option A</th><th>Option B</th>
+			<th>Choice Number</th><th>Option A (50%-50% chance between the two amounts) </th><th>Option B</th>
 		</tr>
 		{% for choice_number in choice_numbers %}
 		<tr>
 			<td>{{ choice_number }}</td>
-			<td><input type="radio" name="donation_{{ choice_number }}" value="True"> {{ choice_number|c }} or {{ choice_number|c }} for charity  </td>
-			<td><input type="radio" name="donation_{{ choice_number }}" value="False"> {{ subsession.round_number|c }} for yourself </td>
+			<td><input type="radio" name="donation_{{ choice_number }}" value="True"> $0.00 or {{ choice_number|c }} for the charity  </td>
+			<td><input type="radio" name="donation_{{ choice_number }}" value="False"> {{ current_function|c }} for yourself </td>
 		</tr>
 		{% endfor %}
 

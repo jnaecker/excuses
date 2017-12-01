@@ -36,7 +36,8 @@ class Normalization(Page):
     	}
 
 class Results(Page):
-    
+    def before_next_page(self):
+        self.player.set_func()
     def is_displayed(self):
 	    return self.round_number == Constants.num_rounds
 

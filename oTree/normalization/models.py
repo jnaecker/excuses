@@ -63,7 +63,10 @@ class Player(BasePlayer):
                 if self.normalization_4 == False:
                     self.payoff=4
 
-
+    def set_func(self):
+        self.participant.vars['switch_point'] = [self.session.vars['round_norms_0'],
+                                                 self.session.vars['round_norms_1'],
+                                                 self.session.vars['round_norms_2']]
 
     
-    
+
