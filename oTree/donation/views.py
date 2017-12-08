@@ -43,7 +43,7 @@ class Donation(Page):
         elif (self.subsession.round_number == 9):
             self.session.vars['round_don_8'] = self.session.vars['donation_amount']
         else:
-            self.session.vars['round_don_10'] = self.session.vars['donation_amount']
+            self.session.vars['round_don_9'] = self.session.vars['donation_amount']
 
     
         self.player.set_payoffs()
@@ -53,9 +53,13 @@ class Donation(Page):
         function = self.participant.vars.get("switch_point")
         current_rnd = self.subsession.round_number
         current_func = function[current_rnd-1]
+        prob = current_rnd * 10
+        opp_prob = 100-prob
         return {
     		'choice_numbers': range(0, Constants.num_rows),
-            'current_function': current_func
+            'current_function': current_func,
+            'self_prob' : prob,
+            'char_prob' : opp_prob
     	}
 
 
@@ -74,9 +78,7 @@ class Results(Page):
                        self.session.vars['round_don_6'],
                        self.session.vars['round_don_7'],
                        self.session.vars['round_don_8'],
-                       self.session.vars['round_don_9'],
-                       self.session.vars['round_don_10'],
-                       self.session.vars['round_don_11']]
+                       self.session.vars['round_don_9']]
     def func(self):
 
 

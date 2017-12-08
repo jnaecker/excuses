@@ -47,8 +47,8 @@ class Results(Page):
                        self.session.vars['round_norms_2']]
 
         return {
-            'paying_round': self.session.vars['paying_round'],
-            'paying_choice': self.session.vars['paying_choice'],
+            'paying_round': self.session.vars['paying_round_norm'],
+            'paying_choice': self.session.vars['paying_choice_norm'],
             'player_in_all_rounds': self.player.in_all_rounds(),
             'payoff' : self.participant.payoff,
             'ro_norms' : round_norms
