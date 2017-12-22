@@ -17,35 +17,18 @@ class Donation(Page):
                                                     self.player.donation_1,
                                                     self.player.donation_2,
                                                     self.player.donation_3,
-                                                    self.player.donation_4].index(False)
+                                                    self.player.donation_4,
+                                                    self.player.donation_5,
+                                                    self.player.donation_6,
+                                                    self.player.donation_7,
+                                                    self.player.donation_8,
+                                                    self.player.donation_9].index(False)
         except ValueError:
-            self.session.vars['donation_amount'] = 0
+            self.session.vars['donation_amount'] = Constants.num_rows
 
 
-        
+        self.player.set_func()
 
-        if(self.subsession.round_number == 1):
-            self.session.vars['round_don_0'] = self.session.vars['donation_amount']
-        elif(self.subsession.round_number == 2):
-            self.session.vars['round_don_1'] = self.session.vars['donation_amount']
-        elif (self.subsession.round_number == 3):
-            self.session.vars['round_don_2'] = self.session.vars['donation_amount']
-        elif (self.subsession.round_number == 4):
-            self.session.vars['round_don_3'] = self.session.vars['donation_amount']
-        elif (self.subsession.round_number == 5):
-            self.session.vars['round_don_4'] = self.session.vars['donation_amount']
-        elif (self.subsession.round_number == 6):
-            self.session.vars['round_don_5'] = self.session.vars['donation_amount']
-        elif (self.subsession.round_number == 7):
-            self.session.vars['round_don_6'] = self.session.vars['donation_amount']
-        elif (self.subsession.round_number == 8):
-            self.session.vars['round_don_7'] = self.session.vars['donation_amount']
-        elif (self.subsession.round_number == 9):
-            self.session.vars['round_don_8'] = self.session.vars['donation_amount']
-        else:
-            self.session.vars['round_don_9'] = self.session.vars['donation_amount']
-
-    
         self.player.set_payoffs()
 
 
@@ -69,25 +52,12 @@ class Results(Page):
 	    return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        round_don = [self.session.vars['round_don_0'],
-                       self.session.vars['round_don_1'],
-                       self.session.vars['round_don_2'],
-                       self.session.vars['round_don_3'],
-                       self.session.vars['round_don_4'],
-                       self.session.vars['round_don_5'],
-                       self.session.vars['round_don_6'],
-                       self.session.vars['round_don_7'],
-                       self.session.vars['round_don_8'],
-                       self.session.vars['round_don_9']]
-    def func(self):
-
-
         return {
             'paying_round': self.session.vars['paying_round'],
             'paying_choice': self.session.vars['paying_choice'],
             'player_in_all_rounds': self.player.in_all_rounds(),
             'payoff' : self.participant.payoff,
-            'ro_don' : round_don
+            'ro_don' : self.participant.vars['round_donations']
         }      
 
 class RoundResults(Page):
