@@ -26,6 +26,7 @@ class Subsession(BaseSubsession):
             self.session.vars['paying_round_norm'] = random.randint(1, Constants.num_rounds)
             self.session.vars['paying_choice_norm'] = random.randint(0, Constants.num_rows-1)
 
+
 class Group(BaseGroup):
     pass
 
@@ -59,24 +60,14 @@ class Player(BasePlayer):
                         self.payoff=round_num
 
 
-
-            # if(self.session.vars['paying_choice_norm']==1):
-            #     if self.normalization_1 == True:
-            #         self.payoff=round_num
-            # elif(self.session.vars['paying_choice_norm']==2):
-            #     if self.normalization_2 == True:
-            #         self.payoff=round_num
-            # elif(self.session.vars['paying_choice_norm']==3):
-            #     if self.normalization_3 == True:
-            #         self.payoff=round_num
-            # elif(self.session.vars['paying_choice_norm']==4):
-            #     if self.normalization_4 == True:
-            #         self.payoff=round_num
-
     def set_func(self):
-        self.participant.vars['switch_point'] = [self.session.vars['round_norms_0'],
-                                                 self.session.vars['round_norms_1'],
-                                                 self.session.vars['round_norms_2']]
+        if self.subsession.round_number == 1:
+            self.participant.vars['switch_point'] = [self.session.vars['normalization_amount']]
+        else:
+            self.participant.vars['switch_point'].append(self.session.vars['normalization_amount'])
 
-    
+        # self.participant.vars['switch_point'] = [self.session.vars['round_norms_0'],
+        #                                          self.session.vars['round_norms_1'],
+        #                                          self.session.vars['round_norms_2']]
 
+      
