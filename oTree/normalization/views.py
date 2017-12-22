@@ -24,16 +24,10 @@ class Normalization(Page):
         except ValueError:
             self.session.vars['normalization_amount'] = Constants.num_rows
         
-        #This section of code stores the current round normalization amount into
-        #Wait I think this can be done in set_func
-        # if(self.subsession.round_number==1):
-        #     self.session.vars['round_norms_0'] = self.session.vars['normalization_amount']
-        # elif(self.subsession.round_number==2):
-        #     self.session.vars['round_norms_1'] = self.session.vars['normalization_amount']
-        # else:
-        #     self.session.vars['round_norms_2'] = self.session.vars['normalization_amount']
-
+        #Calls set_func function in models.py that creates array of normalization amounts 
+        #that are passed on to next round
         self.player.set_func()
+
         #Calls the set_payoff function in models.py    
         self.player.set_payoffs()
 
@@ -47,16 +41,10 @@ class Normalization(Page):
 
 #This class controls the final results of all rounds of the normalization app
 class Results(Page):
-    # def before_next_page(self):
-    #     self.player.set_func()
     def is_displayed(self):
 	    return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        # round_norms = [self.session.vars['round_norms_0'],
-        #                self.session.vars['round_norms_1'],
-        #                self.session.vars['round_norms_2']]
-
         return {
             'paying_round': self.session.vars['paying_round_norm'],
             'paying_choice': self.session.vars['paying_choice_norm'],
@@ -72,7 +60,6 @@ class RoundResults(Page):
     def vars_for_template(self):
         return {
             'normalization_amount': self.session.vars['normalization_amount']
-
         }     
 
 

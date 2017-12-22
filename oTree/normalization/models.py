@@ -44,11 +44,9 @@ class Player(BasePlayer):
     normalization_amount = models.IntegerField()
 
 
-    round_norms_0 = models.IntegerField()
-    round_norms_1 = models.IntegerField()
-    round_norms_2 = models.IntegerField()
-
-
+    #Sets payoff for player if the given round is also the payoff round
+    #If it is, it assigns the player money if they choose that they would get the money
+    #i.e. they said true in the paying choice row
     def set_payoffs(self):
         norm_amounts = [self.normalization_0, self.normalization_1, self.normalization_2, 
                         self.normalization_3, self.normalization_4]
@@ -59,15 +57,14 @@ class Player(BasePlayer):
                     if norm_amounts[i]==True:
                         self.payoff=round_num
 
-
+    #Creates and updates the switch_point array that stores the normalization_amount
+    #for each round.
     def set_func(self):
         if self.subsession.round_number == 1:
             self.participant.vars['switch_point'] = [self.session.vars['normalization_amount']]
         else:
             self.participant.vars['switch_point'].append(self.session.vars['normalization_amount'])
 
-        # self.participant.vars['switch_point'] = [self.session.vars['round_norms_0'],
-        #                                          self.session.vars['round_norms_1'],
-        #                                          self.session.vars['round_norms_2']]
+
 
       
