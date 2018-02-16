@@ -38,17 +38,18 @@ class Donation(Page):
 
 
     def vars_for_template(self):
-        if self.subsession.round_number >= Constants.num_rows:
+        if self.subsession.round_number >= Constants.num_rounds:
             part = "yourself"
         else:  
             part = "charity"
         function = self.participant.vars.get("switch_point")
         current_rnd = self.subsession.round_number
         if part == "yourself":
-            current_func = function[(current_rnd-1)%(Constants.num_rows-1)]
+            current_func = function[(current_rnd-1)%((Constants.num_rounds/2)-1)]
         else:
-            current_func = (current_rnd-1)%(Constants.num_rows-1)
-        prob = (current_rnd%(Constants.num_rows-1)) * 10
+            current_func = (current_rnd-1)
+        prob = (current_rnd%((Constants.num_rounds/2)-1)) * 10
+        
         if prob == 0:
             prob =100
             opp_prob = 0
