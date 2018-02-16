@@ -38,7 +38,7 @@ class Donation(Page):
 
 
     def vars_for_template(self):
-        if self.subsession.round_number >= Constants.num_rounds:
+        if self.subsession.round_number >= Constants.num_rounds/2:
             part = "yourself"
         else:  
             part = "charity"
@@ -49,7 +49,7 @@ class Donation(Page):
         else:
             current_func = (current_rnd-1)
         prob = (current_rnd%((Constants.num_rounds/2)-1)) * 10
-        
+
         if prob == 0:
             prob =100
             opp_prob = 0
