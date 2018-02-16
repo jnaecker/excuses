@@ -18,7 +18,7 @@
 		<tr>
 			<td>{{ choice_number }}</td>
 			<td><input type="radio" name="donation_{{ choice_number }}" value="True"> $10.00 or $0.00 for yourself </td>
-			<td><input type="radio" name="donation_{{ choice_number }}" value="False"> {{ choice_number|c }} for charity </td>
+			<td><input type="radio" name="donation_{{ choice_number }}" value="False"> {{ choice_number|c }} for {{charity_self}} </td>
 		</tr>
 		{% endfor %}
 

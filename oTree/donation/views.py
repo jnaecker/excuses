@@ -38,16 +38,28 @@ class Donation(Page):
 
 
     def vars_for_template(self):
+        if self.subsession.round_number >= Constants.num_rows:
+            part = "yourself"
+        else:  
+            part = "charity"
         function = self.participant.vars.get("switch_point")
         current_rnd = self.subsession.round_number
-        current_func = function[current_rnd-1]
-        prob = current_rnd * 10
-        opp_prob = 100-prob
+        if part == "yourself":
+            current_func = function[(current_rnd-1)%(Constants.num_rows-1)]
+        else:
+            current_func = (current_rnd-1)%(Constants.num_rows-1)
+        prob = (current_rnd%(Constants.num_rows-1)) * 10
+        if prob == 0:
+            prob =100
+            opp_prob = 0
+        else:
+            opp_prob = 100-prob
         return {
     		'choice_numbers': range(0, Constants.num_rows),
             'current_function': current_func,
             'self_prob' : prob,
-            'char_prob' : opp_prob
+            'char_prob' : opp_prob,
+            'charity_self' : part
     	}
 
 #This class controls the final results of all rounds of the donation app
