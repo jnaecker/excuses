@@ -38,7 +38,7 @@ class Donation(Page):
 
 
     def vars_for_template(self):
-        if self.subsession.round_number >= Constants.num_rounds/2:
+        if self.subsession.round_number > Constants.num_rounds/2:
             part = "yourself"
         else:
             part = "charity"
