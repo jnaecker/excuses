@@ -7,48 +7,72 @@ from .models import Constants
 class PlayerBot(Bot):
 
     def play_round(self):
-        #R 1
-        yield (views.Donation, {
-        	'donation_0': True,
-        	'donation_1': True,
-        	'donation_2': False,
-        	})
+
+        cases = [{'donation_0': True, 'donation_1': True, 'donation_2': True,},
+                 {'donation_0': False, 'donation_1': False, 'donation_2': False,},
+                 {'donation_0': True, 'donation_1': True, 'donation_2': False,}]
+
+        yield (views.Donation, self.case)
         yield (views.RoundResults)
         #R 2
-        yield (views.Donation, {
-        	'donation_0': True,
-        	'donation_1': True,
-        	'donation_2': False,
-        	})
+        yield (views.Donation, self.case)
         yield (views.RoundResults)
         #R 3
-        yield (views.Donation, {
-        	'donation_0': True,
-        	'donation_1': True,
-        	'donation_2': False,
-        	})
+        yield (views.Donation, self.case)
         yield (views.RoundResults)
         #R 4
-        yield (views.Donation, {
-        	'donation_0': True,
-        	'donation_1': True,
-        	'donation_2': False,
-        	})
+        yield (views.Donation, self.case)
         yield (views.RoundResults)
         #R 5
-        yield (views.Donation, {
-        	'donation_0': True,
-        	'donation_1': True,
-        	'donation_2': False,
-        	})
+        yield (views.Donation, self.case)
         yield (views.RoundResults)
         #R 6
-        yield (views.Donation, {
-        	'donation_0': True,
-        	'donation_1': True,
-        	'donation_2': False,
-        	})
+        yield (views.Donation, self.case)
         yield (views.RoundResults)
+
+
+        #R 1
+        # yield (views.Donation, {
+        # 	'donation_0': True,
+        # 	'donation_1': True,
+        # 	'donation_2': False,
+        # 	})
+        # yield (views.RoundResults)
+        # #R 2
+        # yield (views.Donation, {
+        # 	'donation_0': True,
+        # 	'donation_1': True,
+        # 	'donation_2': False,
+        # 	})
+        # yield (views.RoundResults)
+        # #R 3
+        # yield (views.Donation, {
+        # 	'donation_0': True,
+        # 	'donation_1': True,
+        # 	'donation_2': False,
+        # 	})
+        # yield (views.RoundResults)
+        # #R 4
+        # yield (views.Donation, {
+        # 	'donation_0': True,
+        # 	'donation_1': True,
+        # 	'donation_2': False,
+        # 	})
+        # yield (views.RoundResults)
+        # #R 5
+        # yield (views.Donation, {
+        # 	'donation_0': True,
+        # 	'donation_1': True,
+        # 	'donation_2': False,
+        # 	})
+        # yield (views.RoundResults)
+        # #R 6
+        # yield (views.Donation, {
+        # 	'donation_0': True,
+        # 	'donation_1': True,
+        # 	'donation_2': False,
+        # 	})
+        # yield (views.RoundResults)
 
 #
 # class PlayerBot(Bot):

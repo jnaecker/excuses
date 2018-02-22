@@ -46,16 +46,20 @@ class Donation(Page):
         current_rnd = self.subsession.round_number
         if part == "yourself":
             current_func = function[int((current_rnd-(Constants.num_rounds/2))-1)]
+            prob = int(current_rnd-(Constants.num_rounds/2))*10
+            opp_prob = 100-prob
         else:
             current_func = (current_rnd-1)
-
-
-        prob = (current_rnd%((Constants.num_rounds/2)-1)) * 10
-        if prob == 0:
-            prob =100
-            opp_prob = 0
-        else:
+            prob = current_rnd*10
             opp_prob = 100-prob
+
+
+        # prob = (current_rnd%((Constants.num_rounds/2)-1)) * 10
+        # if prob == 0:
+        #     prob =100
+        #     opp_prob = 0
+        # else:
+        #     opp_prob = 100-prob
         return {
     		'choice_numbers': range(0, Constants.num_rows),
             'current_function': current_func,
