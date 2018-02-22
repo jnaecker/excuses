@@ -16,11 +16,16 @@ This app tests things about donations to charity under uncertainty.
 class Constants(BaseConstants):
     name_in_url = 'donation'
     players_per_group = None
-    num_rounds = 22
-    num_rows = 10
+    #num_rounds = 22
+    #num_rows = 10
+
+    #For Testing
+    num_rounds = 6
+    num_rows = 3
+
 
 class Subsession(BaseSubsession):
-    
+
     def creating_session(self):
         if self.round_number == 1:
             self.session.vars['paying_round_don'] = random.randint(1, Constants.num_rounds)
@@ -33,18 +38,16 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
 
-    donation_0 = models.BooleanField()    
+    donation_0 = models.BooleanField()
     donation_1 = models.BooleanField()
     donation_2 = models.BooleanField()
-    donation_3 = models.BooleanField()
-    donation_4 = models.BooleanField()
-    donation_5 = models.BooleanField()    
-    donation_6 = models.BooleanField()
-    donation_7 = models.BooleanField()
-    donation_8 = models.BooleanField()
-    donation_9 = models.BooleanField()
-
-
+    # donation_3 = models.BooleanField()
+    # donation_4 = models.BooleanField()
+    # donation_5 = models.BooleanField()
+    # donation_6 = models.BooleanField()
+    # donation_7 = models.BooleanField()
+    # donation_8 = models.BooleanField()
+    # donation_9 = models.BooleanField()
 
     donation_amount = models.IntegerField()
 
@@ -54,17 +57,18 @@ class Player(BasePlayer):
     #i.e. they said true in the paying choice row.
     #This adds the payoff from this app to the payoff of the last app.
     def set_payoffs(self):
-        don_amounts = [self.donation_0, self.donation_1, self.donation_2, 
-                        self.donation_3, self.donation_4, self.donation_5, 
-                        self.donation_6, self.donation_7, self.donation_8, 
-                        self.donation_9]
+        # don_amounts = [self.donation_0, self.donation_1, self.donation_2,
+        #                 self.donation_3, self.donation_4, self.donation_5,
+        #                 self.donation_6, self.donation_7, self.donation_8,
+        #                 self.donation_9]
+        don_amounts = [self.donation_0, self.donation_1, self.donation_2]
         round_num = self.subsession.round_number
-        if(self.session.vars['paying_round_don']==round_num):
 
+        if(self.session.vars['paying_round_don']==round_num):
             for i in range(0, Constants.num_rows):
                 if(self.session.vars['paying_choice_don']==i):
                     if don_amounts[i]==True:
-                        if random.random() <= round_num/10:
+                        if random.random() <= round_num/Constants.num_rows:
                             self.payoff = self.payoff + round_num
 
 
@@ -75,7 +79,3 @@ class Player(BasePlayer):
             self.participant.vars['round_donations'] = [self.session.vars['donation_amount']]
         else:
             self.participant.vars['round_donations'].append(self.session.vars['donation_amount'])
-
-
-    
-    
