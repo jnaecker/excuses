@@ -14,15 +14,16 @@
 		<tr>
 			<th>Choice Number</th><th>Option A ({{self_prob}}&#37; - {{char_prob}}&#37; chance between the two amounts) </th><th>Option B</th>
 		</tr>
-		{% for choice_number in choice_numbers %}
+    {% for choice_number in row_temp %}
 		<tr>
-			<td>{{ choice_number }}</td>
+			<td>{{ choice_number.0 }}</td>
 			<td><input type="radio" name="donation_{{ choice_number }}" value="True"> $10.00 or $0.00 for yourself </td>
-			<td><input type="radio" name="donation_{{ choice_number }}" value="False"> {{ choice_number|c }} for {{charity_self}} </td>
+			<td><input type="radio" name="donation_{{ choice_number }}" value="False"> {{ choice_number.1 |c }} for {{charity_self}} </td>
 		</tr>
 		{% endfor %}
 
-		
+
+
 	</table>
 
     {% next_button %}
