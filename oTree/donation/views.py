@@ -45,11 +45,9 @@ class Donation(Page):
         function = self.participant.vars.get("switch_point")
         current_rnd = self.subsession.round_number
         if part == "yourself":
-            #current_func = function[int((current_rnd-(Constants.num_rounds/2))-1)]
             prob = int(current_rnd-(Constants.num_rounds/2))*10
             opp_prob = 100-prob
         else:
-            #current_func = (current_rnd-1)
             function = [1,2,3]
             prob = current_rnd*10
             opp_prob = 100-prob
@@ -59,19 +57,12 @@ class Donation(Page):
         for i in range(0 ,Constants.num_rows):
             row_temp.append([i, function[i]])
 
-        # prob = (current_rnd%((Constants.num_rounds/2)-1)) * 10
-        # if prob == 0:
-        #     prob =100
-        #     opp_prob = 0
-        # else:
-        #     opp_prob = 100-prob
+
         return {
     		'choice_numbers': range(0, Constants.num_rows),
-            #'current_function': current_func,
             'self_prob' : prob,
             'char_prob' : opp_prob,
             'charity_self' : part,
-            #'function' : function
             'row_temp' : row_temp
     	}
 
